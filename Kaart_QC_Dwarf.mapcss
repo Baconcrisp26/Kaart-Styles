@@ -160,6 +160,12 @@ setting::user_nick2 {
   default: true;
 }
 
+setting::user_callista {
+  type: boolean;
+  label: tr("Turn User csjupiter1 On/Off");
+  default: true;
+}
+
 /* Tracking Selectors -- Way and node style BEFORE they are uploaded */
 
 node:modified::modified_layer {
@@ -286,6 +292,10 @@ node:modified < way::modified_layer {
   set .nick;
 }
 
+*[eval(JOSM_search("user:csjupiter1"))][setting("user_callista")] {
+  set .nick;
+}
+
 /*
 
 /* Styling of ways and nodes once they belong to "history" for each individual user */
@@ -312,6 +322,7 @@ way.sarena,
 way.ryan,
 way.nick,
 way.claire,
+way.callista,
 way.nick2 {
   z-index: -10;
   casing-color: #B108D6;
@@ -350,6 +361,7 @@ node.sarena,
 node.ryan,
 node.nick,
 node.claire,
+node.callista,
 node.nick2 {
   symbol-size: 18;
   symbol-shape: triangle;
