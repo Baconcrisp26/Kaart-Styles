@@ -2,7 +2,7 @@ meta {
   title: "QC Styles For Mexico Team";
   description: "Highlights features that were created/modified by users";
   watch-modified: true;
-  version: "1.4";
+  version: "1.5";
   icon: "http://uncrate.com/p/2016/02/smart-kart.jpg";
 
 }
@@ -17,6 +17,8 @@ meta {
 1.3 Simplified user lines -- Louis -- 3/18/2019
 
 1.4 Adjusted user, style lines and appearances -- 3/20/2019
+
+1.5 Added new users, simplified node highlight & node modified overlay -- Louis,Ian -- 5/09/2019
 
 
 /* User Settings */
@@ -249,14 +251,26 @@ setting::user_BrianL {
   default:true;
 }
 
+setting::user_Logan {
+  type:boolean;
+  label:tr("Turn User Dalekokarta On/Off");
+  default:true;
+}
+
+setting::user_Zach {
+  type:boolean;
+  label:tr("Turn User MTBdude On/Off");
+  default:true;
+}
+
 /* Tracking Selectors -- Way and node style BEFORE they are uploaded */
 
 node:modified::modified_layer {
     symbol-shape: circle;
-    symbol-size: 18;
-    symbol-stroke-color: blue;
-    symbol-fill-color: orange;
-    symbol-fill-opacity: 1;
+    symbol-size: 22;
+    symbol-stroke-color: orange;
+    symbol-fill-width: 3px;
+    symbol-fill-opacity: 0.5;
     z-index: -5;
 }
 
@@ -265,7 +279,7 @@ node:modified < way::modified_layer {
     width: 6;
     color: transparent;
     opacity: 0;
-    casing-width: 4;
+    casing-width: 7;
     casing-color: #47D608;
     casing-opacity: 0.7;
     z-index: -5;
@@ -428,6 +442,14 @@ node:modified < way::modified_layer {
   set .BrianL;
 }
 
+*[eval(JOSM_search("user:Dalekokarta"))][setting("user_Logan")] {
+  set .Logan;
+}
+
+*[eval(JOSM_search("user:MTBdude"))][setting("user_Zach")] {
+  set .Zach;
+}
+
 /*
 
 /* Styling of ways and nodes once they belong to "history" for each individual user */
@@ -469,6 +491,8 @@ way.LouisM,
 way.DylanF,
 way.DavidK,
 way.IanM,
+way.Logan,
+way.Zach,
 way.BrianL {
   z-index: -10;
   casing-color: #B108D6;
@@ -518,17 +542,21 @@ node.JacobK,
 node.LouisM,
 node.DylanF,
 node.DavidK,
+node.Logan,
+node.Zach,
 node.BrianL {
-  symbol-size: 18;
+  symbol-size: 15;
   symbol-shape: triangle;
   symbol-stroke-color: blue;
-  symbol-fill-color: blue;
+  symbol-fill-width: 3px;
   symbol-fill-opacity: 0.5;
+  z-index: -5;
 }
 
-node:selected {
-    symbol-size: 17;
+node:selected::selected_layer {
+    symbol-shape: circle;
+    symbol-size: 22;
     symbol-stroke-color: #DF2E08;
     symbol-stroke-width: 3px;
-	symbol-fill-color: #DF2E08;
+	symbol-fill-opacity: 0.5;
 }
