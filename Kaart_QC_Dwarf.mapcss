@@ -2,7 +2,7 @@ meta {
   title: "QC Styles For Dwarf Team";
   description: "Highlights features that were created/modified by users";
   watch-modified: true;
-  version: "1.4";
+  version: "1.5";
   icon: "http://uncrate.com/p/2016/02/smart-kart.jpg";
 
 }
@@ -12,7 +12,11 @@ meta {
 
 1.3 Added Kaart users -- Aaron -- 12/14/2016
 
-1.4 Added new way & node styles -- Louis -- 3/20/2019
+1.4 Added new way & node styles, simplified usernames -- Louis,Ian -- 3/20/2019
+
+1.5 Simplified node highlight & node modified overlays -- Louis,Ian -- 5/09/2019
+
+
 
 /* User Settings */
 
@@ -160,14 +164,20 @@ setting::user_nick2 {
   default: true;
 }
 
+setting::user_anja {
+  type: boolean;
+  label: tr("Turn User Ajaie On/Off");
+  default: true;
+}
+
 /* Tracking Selectors -- Way and node style BEFORE they are uploaded */
 
 node:modified::modified_layer {
     symbol-shape: circle;
-    symbol-size: 18;
-    symbol-stroke-color: blue;
-    symbol-fill-color: orange;
-    symbol-fill-opacity: 1;
+    symbol-size: 22;
+    symbol-stroke-color: orange;
+    symbol-fill-width: 3px;
+    symbol-fill-opacity: 0.5;
     z-index: -5;
 }
 
@@ -176,7 +186,7 @@ node:modified < way::modified_layer {
     width: 6;
     color: transparent;
     opacity: 0;
-    casing-width: 4;
+    casing-width: 7;
     casing-color: #47D608;
     casing-opacity: 0.7;
     z-index: -5;
@@ -286,6 +296,10 @@ node:modified < way::modified_layer {
   set .nick;
 }
 
+*[eval(JOSM_search("user:Ajaie"))][setting("user_anja")] {
+  set .nick;
+}
+
 /*
 
 /* Styling of ways and nodes once they belong to "history" for each individual user */
@@ -312,6 +326,7 @@ way.sarena,
 way.ryan,
 way.nick,
 way.claire,
+way.anja,
 way.nick2 {
   z-index: -10;
   casing-color: #B108D6;
@@ -350,17 +365,21 @@ node.sarena,
 node.ryan,
 node.nick,
 node.claire,
+node.anja,
 node.nick2 {
-  symbol-size: 18;
+  symbol-size: 15;
   symbol-shape: triangle;
   symbol-stroke-color: blue;
-  symbol-fill-color: blue;
+  symbol-stroke-width: 3px;
   symbol-fill-opacity: 0.5;
+  z-index: -5;
 }
 
-  node:selected {
-    symbol-size: 17;
+  node:selected::selected_layer {
+    symbol-shape: circle;
+    symbol-size: 22;
     symbol-stroke-color: #DF2E08;
     symbol-stroke-width: 3px;
-  symbol-fill-color: #DF2E08;
+  symbol-fill-opacity: 0.5;
+  z-index: -5;
 }
